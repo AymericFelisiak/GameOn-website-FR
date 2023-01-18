@@ -1,3 +1,6 @@
+@import "smaller-screens.css";
+@import "bigger-screens.css";
+
 :root {
   --font-default: "DM Sans", Arial, Helvetica, sans-serif;
   --font-slab: var(--font-default);
@@ -37,6 +40,11 @@ p {
   margin-bottom: 50px;
 }
 
+.topnav .header-logo {
+  display: flex;
+  align-items: center;
+}
+
 .topnav a {
   float: left;
   display: block;
@@ -63,46 +71,6 @@ p {
 
 .topnav .icon {
   display: none;
-}
-
-/* Changes navbar on smaller screens */
-@media screen and (max-width: 834px) {
-  .topnav a {
-    display: none;
-  }
-
-  .topnav a.icon {
-    float: right;
-    display: block;
-  }
-
-  .topnav.responsive {
-    position: relative;
-  }
-
-  .topnav.responsive .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-
-  .topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-}
-
-@media screen and (max-width: 540px) {
-  .topnav a {
-    display: none;
-  }
-
-  .topnav a.icon {
-    float: right;
-    display: block;
-    margin-top: -15px;
-  }
 }
 
 main {
@@ -159,6 +127,8 @@ main {
 
 .bground {
   display: none;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -501,51 +471,82 @@ footer {
 
 @media screen and (max-width: 892px) {
   .hero-section {
-    flex-direction: column;
-    align-items: center;
-    box-shadow: unset;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: unset;
   }
 
   .hero-content {
-    width: 100%;
-    background: #fff;
-    color: #000;
-    padding: 0px;
+      width: 100%;
+      background: #fff;
+      color: #000;
+      padding: 0px;
   }
 
   .hero-content .btn-signup {
-    display: none;
+      display: none;
   }
 
   .hero-headline {
-    width: 100%;
-    font-size: 4.5rem;
-    white-space: normal;
+      width: 100%;
+      font-size: 4.5rem;
+      white-space: normal;
   }
 
   .hero-text {
-    width: unset;
-    font-size: 1.5rem;
+      width: unset;
+      font-size: 1.5rem;
   }
 
   .hero-img {
-    width: 100%;
+      width: 100%;
   }
 
   .hero-img img {
-    border-radius: 10px;
-    margin-top: 40px;
+      border-radius: 10px;
+      margin-top: 40px;
   }
 
-  .hero-section>.btn-signup {
-    display: block;
-    margin: 32px auto 10px;
-    padding: 12px 35px;
+  .hero-section > .btn-signup {
+      display: block;
+      margin: 32px auto 10px;
+      padding: 12px 35px;
   }
 
   .copyrights {
-    margin-top: 50px;
-    text-align: center;
+      margin-top: 50px;
+      text-align: center;
+  }
+}
+
+/* Changes navbar on smaller screens */
+@media screen and (max-width: 834px) {
+  .topnav a {
+      display: none;
+  }
+
+  .topnav .header-logo {
+      height: 54px;
+  }
+
+  .topnav a.icon {
+      display: flex;
+  }
+
+  .topnav.responsive {
+      position: relative;
+  }
+
+  .topnav.responsive .icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+  }
+
+  .topnav.responsive a {
+      float: none;
+      display: block;
+      text-align: left;
   }
 }
 
