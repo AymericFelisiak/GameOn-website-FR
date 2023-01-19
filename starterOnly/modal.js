@@ -40,7 +40,7 @@ function validate() {
 
   if(firstName < 2) {
     formData[0].setAttribute("data-error-visible", "true");
-    formData[0].setAttribute("data-error", "Prénom");
+    formData[0].setAttribute("data-error", "Veuillez entrer 2 caractères ou plus.");
     valid = false;
   }
   else {
@@ -50,7 +50,7 @@ function validate() {
 
   if(lastName < 2) {
     formData[1].setAttribute("data-error-visible", "true");
-    formData[1].setAttribute("data-error", "Nom");
+    formData[1].setAttribute("data-error", "Veuillez entrer 2 caractères ou plus.");
     valid = false;
   } 
   else {
@@ -60,7 +60,7 @@ function validate() {
 
   if(!isEmailValid(email)) {
     formData[2].setAttribute("data-error-visible", "true");
-    formData[2].setAttribute("data-error", "Email");
+    formData[2].setAttribute("data-error", "Email incorrect.");
     valid = false;
   }
   else {
@@ -70,7 +70,7 @@ function validate() {
 
   if(birthdate == '') {
     formData[3].setAttribute("data-error-visible", "true");
-    formData[3].setAttribute("data-error", "Birthdate");
+    formData[3].setAttribute("data-error", "Vous devez entrer votre date de naissance.");
     valid = false;
   }
   else {
@@ -80,7 +80,7 @@ function validate() {
 
   if(quantity == '') {
     formData[4].setAttribute("data-error-visible", "true");
-    formData[4].setAttribute("data-error", "Quantité");
+    formData[4].setAttribute("data-error", "Ce champs ne doit pas être vide.");
     valid = false;
   }
   else {
