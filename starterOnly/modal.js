@@ -11,94 +11,117 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
-const closeBtn = document.querySelectorAll(".close");
+const closeBtn = document.querySelector(".close");
+const modalThanksBtn = document.querySelector('#modal-thanks-close');
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-closeBtn.forEach((btn) => btn.addEventListener("click", closeModal));
+closeBtn.addEventListener("click", closeModal);
+modalThanksBtn.addEventListener("click", closeThanksModal);
 
 
 // launch modal form
 function launchModal() {
   modalbg.style.display = "flex";
+  modalbg.querySelector(".content").style.display = "block";
 }
 
-//close modal form
+// close modal form
 function closeModal() {
   modalbg.style.display = "none";
 }
 
+// reloads the page when closing modal thanks window
+function closeThanksModal() {
+  window.location.reload();
+}
+
 // Returns true if each input from the user in the form is valid
 function validate() {
-  let firstName = formData[0].children['first'].value;
-  let lastName = formData[1].children['last'].value;
-  let email = formData[2].children['email'].value;
-  let birthdate = formData[3].children['birthdate'].value;
-  let quantity = formData[4].children['quantity'].value;
+
+  let firstName = document.querySelector('#first');
+  let lastName = document.querySelector('#last');
+  let email = document.querySelector('#email');
+  let birthdate = document.querySelector('#birthdate');
+  let quantity = document.querySelector('#quantity');
+  let location = document.querySelectorAll('input[name="location"]');
+  let contract = document.querySelector('#checkbox1');
 
   let valid = true;
 
-  if(firstName < 2) {
-    formData[0].setAttribute("data-error-visible", "true");
-    formData[0].setAttribute("data-error", "Prénom");
+  if(firstName.value < 2) {
+    invalidInput(firstName, "Veuillez entrer 2 caractères ou plus pour le champ du prénom.");
     valid = false;
   }
-  else {
-    formData[0].setAttribute("data-error-visible", "false");
-    formData[0].removeAttribute("data-error");
-  }
+  else validInput(firstName);
 
-  if(lastName < 2) {
-    formData[1].setAttribute("data-error-visible", "true");
-    formData[1].setAttribute("data-error", "Nom");
+  if(lastName.value < 2) {
+    invalidInput(lastName, "Veuillez entrer 2 caractères ou plus pour le champ du nom.");
     valid = false;
   } 
-  else {
-    formData[1].setAttribute("data-error-visible", "false");
-    formData[1].removeAttribute("data-error");
-  }
+  else validInput(lastName);
 
-  if(!isEmailValid(email)) {
-    formData[2].setAttribute("data-error-visible", "true");
-    formData[2].setAttribute("data-error", "Email");
+  if(!isEmailValid(email.value)) {
+    invalidInput(email, "Veuillez entrer une adresse mail valide.");
     valid = false;
   }
-  else {
-    formData[2].setAttribute("data-error-visible", "false");
-    formData[2].removeAttribute("data-error");
-  }
+  else validInput(email);
 
-  if(birthdate == '') {
-    formData[3].setAttribute("data-error-visible", "true");
-    formData[3].setAttribute("data-error", "Birthdate");
+  if(birthdate.value == '') {
+    invalidInput(birthdate, "Vous devez entrer votre date de naissance.");
     valid = false;
   }
-  else {
-    formData[3].setAttribute("data-error-visible", "false");
-    formData[3].removeAttribute("data-error");
-  }
+  else validInput(birthdate);
 
-  if(quantity == '') {
-    formData[4].setAttribute("data-error-visible", "true");
-    formData[4].setAttribute("data-error", "Quantité");
+  if(quantity.value == '') {
+    invalidInput(quantity, "Ce champ ne doit pas être vide.");
     valid = false;
   }
-  else {
-    formData[4].setAttribute("data-error-visible", "false");
-    formData[4].removeAttribute("data-error");
-  }
+  else validInput(quantity);
 
-  if(!isLocationValid()) {
+  if(!isLocationValid(location)) {
+    invalidInput(location[0], "Vous devez choisir une option.");
     valid = false;
+  } 
+  else validInput(location[0]);
+
+  if(!contract.checked) {
+    invalidInput(contract, "Vous devez vérifier que vous acceptez les termes et conditions.");
+    valid = false;
+  }
+  else validInput(contract);
+
+  if(valid) {
+    modalbg.querySelector('#form').style.display = "none";
+    modalbg.querySelector('.modal-thanks').style.display = "flex";
+    closeBtn.addEventListener("click", closeThanksModal);
   }
 
   return valid;
 }
 
-// Return true if one element from checklist is checked
-function isLocationValid() {
+// Adds error attributes to html when form input is incorrect
+function invalidInput(node, id) {
+  formData.forEach(elm => {
+    if(elm.contains(node)) {
+      elm.setAttribute("data-error-visible", "true");
+      elm.setAttribute("data-error", id);
+    }
+  });
+}
 
-  let location = formData[5].querySelectorAll('input');
+// Removes error attributes from html when form input is correct
+function validInput(node) {
+  formData.forEach(elm => {
+    if(elm.contains(node)) {
+      elm.removeAttribute("data-error-visible", "true");
+      elm.removeAttribute("data-error");
+    }
+  });
+}
+
+// Return true if one element from checklist is checked
+function isLocationValid(location) {
 
   let locationFlag = false;
 

@@ -137,6 +137,7 @@ main {
 }
 
 .content {
+  display: none;
   margin: 5% auto;
   width: 100%;
   max-width: 500px;
@@ -149,6 +150,35 @@ main {
   color: #fff;
   padding-top: 10px;
 }
+
+.modal-thanks {
+  display: none;
+  align-items: center;
+  flex-direction: column;
+  margin: 5% auto;
+  width: 100%;
+  max-width: 500px;
+  height: 500px;
+  background: #232323;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  color: #fff;
+  padding-top: 10px;
+}
+
+.thanks-text-wrapper {
+  display: flex;
+  height: 90%;
+  justify-content: center;
+  align-items: center;
+}
+
+.thanks-text-wrapper .text-label {
+  font-size: 1em;
+}
+
+.modal-thanks button {}
 
 .modal-body {
   padding: 15px 8%;
@@ -192,19 +222,25 @@ input {
   transition: 0.3s;
 }
 
+/* Shows error message when form input is incorrect */
 .formData[data-error-visible="true"]::after {
   opacity: 1;
 }
 
+/* Changes border color of text areas */
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
 }
 
-/* input[data-error]::after {
-    content: attr(data-error);
-    font-size: 0.4em;
-    color: red;
-} */
+/* Changes checkbox color when none is selected */
+.formData[data-error-visible="true"][name="formData-location"] .checkbox-icon {
+  border: 2px solid #e54858;
+}
+
+/* Changes checkbox color when "i accept contract" isn't selected */
+.formData[data-error-visible="true"] .checkbox2-label[for="checkbox1"] .checkbox-icon {
+  border: 2px solid #e54858;
+}
 
 .checkbox-label,
 .checkbox2-label {
@@ -469,82 +505,99 @@ footer {
 
 @media screen and (max-width: 892px) {
   .hero-section {
-      flex-direction: column;
-      align-items: center;
-      box-shadow: unset;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: unset;
   }
 
   .hero-content {
-      width: 100%;
-      background: #fff;
-      color: #000;
-      padding: 0px;
+    width: 100%;
+    background: #fff;
+    color: #000;
+    padding: 0px;
   }
 
   .hero-content .btn-signup {
-      display: none;
+    display: none;
   }
 
   .hero-headline {
-      width: 100%;
-      font-size: 4.5rem;
-      white-space: normal;
+    width: 100%;
+    font-size: 2em;
+    white-space: normal;
   }
 
   .hero-text {
-      width: unset;
-      font-size: 1.5rem;
+    width: unset;
+    font-size: 1.5rem;
   }
 
   .hero-img {
-      width: 100%;
+    width: 100%;
   }
 
   .hero-img img {
-      border-radius: 10px;
-      margin-top: 40px;
+    border-radius: 10px;
+    margin-top: 40px;
   }
 
-  .hero-section > .btn-signup {
-      display: block;
-      margin: 32px auto 10px;
-      padding: 12px 35px;
+  .hero-section>.btn-signup {
+    display: block;
+    margin: 32px auto 10px;
+    padding: 12px 35px;
   }
 
   .copyrights {
-      margin-top: 50px;
-      text-align: center;
+    margin-top: 50px;
+    text-align: center;
   }
 }
 
 /* Changes navbar on smaller screens */
 @media screen and (max-width: 834px) {
   .topnav a {
-      display: none;
+    display: none;
   }
 
   .topnav .header-logo {
-      height: 54px;
+    height: 53px;
+  }
+
+  .topnav .header-logo img {
+    width: 200px;
   }
 
   .topnav a.icon {
-      display: flex;
+    display: flex;
+    color: #fe142f;
+  }
+
+  .topnav a.icon:hover {
+    color: white;
   }
 
   .topnav.responsive {
-      position: relative;
+    position: relative;
   }
 
   .topnav.responsive .icon {
-      position: absolute;
-      right: 0;
-      top: 0;
+    position: absolute;
+    color: white;
+    right: 0;
+    top: 0;
   }
 
   .topnav.responsive a {
-      float: none;
-      display: block;
-      text-align: left;
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: 502px) {
+  .topnav.responsive a.icon {
+    display: flex;
+    color: black;
   }
 }
 
