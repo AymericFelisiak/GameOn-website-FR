@@ -33,10 +33,12 @@ function closeModal() {
 
 // reloads the page when closing modal thanks window
 function closeThanksModal() {
-  window.location.reload();
+  window.location.href = 'index.html';
 }
 
-// Returns true if each input from the user in the form is valid
+// Checks if form is valid
+// If all tests are passed, change modal style to thanks modal
+// Returns false anyway to prevent page reload
 function validate() {
 
   let firstName = document.querySelector('#first');
@@ -97,7 +99,7 @@ function validate() {
     closeBtn.addEventListener("click", closeThanksModal);
   }
 
-  return valid;
+  return false;
 }
 
 // Adds error attributes to html when form input is incorrect
