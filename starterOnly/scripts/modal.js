@@ -41,23 +41,24 @@ function closeThanksModal() {
 // Returns false anyway to prevent page reload
 function validate() {
 
-  let firstName = document.querySelector('#first');
-  let lastName = document.querySelector('#last');
-  let email = document.querySelector('#email');
-  let birthdate = document.querySelector('#birthdate');
-  let quantity = document.querySelector('#quantity');
-  let location = document.querySelectorAll('input[name="location"]');
-  let contract = document.querySelector('#checkbox1');
-
+  const firstName = document.querySelector('#first');
+  const lastName = document.querySelector('#last');
+  const email = document.querySelector('#email');
+  const birthdate = document.querySelector('#birthdate');
+  const quantity = document.querySelector('#quantity');
+  const location = document.querySelectorAll('input[name="location"]');
+  const contract = document.querySelector('#checkbox1');
+  
   let valid = true;
 
-  if(firstName.value < 2) {
+  if(firstName.value.length < 2 || hasNumber(firstName.value)) {
     invalidInput(firstName, "Veuillez entrer 2 caractères ou plus pour le champ du prénom.");
+    
     valid = false;
   }
   else validInput(firstName);
 
-  if(lastName.value < 2) {
+  if(lastName.value.length < 2 || hasNumber(lastName.value)) {
     invalidInput(lastName, "Veuillez entrer 2 caractères ou plus pour le champ du nom.");
     valid = false;
   } 
@@ -75,8 +76,8 @@ function validate() {
   }
   else validInput(birthdate);
 
-  if(quantity.value == '') {
-    invalidInput(quantity, "Ce champ ne doit pas être vide.");
+  if(!validQuantity(quantity.value)) {
+    invalidInput(quantity, "Ce champ ne doit pas être vide et ne doit que contenir des chiffres de 0 à 99.");
     valid = false;
   }
   else validInput(quantity);
@@ -134,6 +135,55 @@ function isLocationValid(location) {
   });
 
   return locationFlag;
+}
+
+// Returns true if value contains at least a number
+function hasNumber(value) {
+  const reg = new RegExp(/\d/);
+  return reg.test(value);
+}
+
+
+// Returns true if the value :
+// isn't empty
+// is positive (greater than -1)
+// isn't greater than 99
+// only has numbers (no characters)
+function validQuantity(value) {
+
+  if(value == '') {
+    return false;
+  }
+
+  if(!isPositive(value)) {
+    return false;
+  }
+
+  if(value > 99) {
+    return false;
+  }
+
+  if(!onlyNumbers(value)) {
+    return false;
+  }
+
+  return true;
+}
+
+// Returns true if value only has numbers
+function onlyNumbers(value) {
+  const reg = new RegExp(/^[0-9]*/);
+
+  if(!reg.test(value)) {
+    return false;
+  }
+
+  return true;
+}
+
+// Returns true if number is positive
+function isPositive(number) {
+  return number > -1;
 }
 
 // Returns true if email is valid

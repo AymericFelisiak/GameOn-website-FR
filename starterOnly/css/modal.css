@@ -15,7 +15,6 @@
 body {
   display: flex;
   flex-direction: column;
-  background-image: url("background.png");
   font-family: var(--font-default);
   font-size: 18px;
   max-width: 1300px;
@@ -178,8 +177,6 @@ main {
 .thanks-text-wrapper .text-label {
   font-size: 1em;
 }
-
-.modal-thanks button {}
 
 .modal-body {
   padding: 15px 8%;
