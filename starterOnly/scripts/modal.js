@@ -70,8 +70,9 @@ function validate() {
   }
   else validInput(email);
 
+  console.log(isDateOfBirthValid(birthdate.value));
   if(birthdate.value == '') {
-    invalidInput(birthdate, "Vous devez entrer votre date de naissance.");
+    invalidInput(birthdate, "Vous devez entrer votre date de naissance. Format : jj/mm/aaaa");
     valid = false;
   }
   else validInput(birthdate);
@@ -188,7 +189,16 @@ function isPositive(number) {
 
 // Returns true if email is valid
 function isEmailValid(email) {
-  let regex = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+  const regex = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 
   return regex.test(email);
+}
+
+
+// Returns true if date of birth is valid
+// Date format : dd/mm/yyyy
+function isDateOfBirthValid(date) {
+  const regex = new RegExp(/^(?:0[1-9]|[12]\d|3[01])([\/.-])(?:0[1-9]|1[012])\1(?:19|20)\d\d$/);
+
+  return regex.test(date.split("-").reverse().join("-"));
 }
