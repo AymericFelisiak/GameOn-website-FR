@@ -112,6 +112,7 @@ main {
   border-radius: 15px;
   cursor: pointer;
   font-size: 16px;
+  border-style: none;
 }
 
 .button:hover {
@@ -233,7 +234,7 @@ input {
 }
 
 /* Changes checkbox color when none is selected */
-.formData[data-error-visible="true"][name="formData-location"] .checkbox-icon {
+.formData[data-error-visible="true"][id="formData-location"] .checkbox-icon {
   border: 2px solid #e54858;
 }
 
